@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Booking</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .booking-container {
+            background: white;
+            width: 450px;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 6px;
+            background: #007bff;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        #result {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background: #e8f5e9;
+            border-radius: 6px;
+        }
+
+        .ticket-number {
+            font-weight: bold;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="booking-container">
+
+    <h1>🎫 Ticket Booking</h1>
+
+    <form id="bookingForm">
+
+        <div class="form-group">
+            <label>Passenger Name</label>
+            <input type="text" id="name" required>
+        </div>
+
+        <div class="form-group">
+            <label>From</label>
+            <input type="text" id="from" placeholder="Enter source" required>
+        </div>
+
+        <div class="form-group">
+            <label>To</label>
+            <input type="text" id="to" placeholder="Enter destination" required>
+        </div>
+
+        <div class="form-group">
+            <label>Travel Date</label>
+            <input type="date" id="date" required>
+        </div>
+
+        <div class="form-group">
+            <label>Number of Passengers</label>
+            <input type="number" id="passengers" min="1" max="10" value="1">
+        </div>
+
+        <div class="form-group">
+            <label>Ticket Type</label>
+
+            <select id="ticketType">
+                <option value="500">Standard - ₹500</option>
+                <option value="1000">Premium - ₹1000</option>
+                <option value="1500">Business - ₹1500</option>
+            </select>
+        </div>
+
+        <button type="submit">Book Ticket</button>
+
+    </form>
+
+    <div id="result"></div>
+
+</div>
+
+<script>
+
+document.getElementById("bookingForm")
+    .addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        const name =
+            document.getElementById("name").value;
+
+        const from =
+            document.getElementById("from").value;
+
+        const to =
+            document.getElementById("to").value;
+
+        const date =
+            document.getElementById("date").value;
+
+        const passengers =
+            parseInt(document.getElementById("passengers").value);
+
+        const price =
+            parseInt(document.getElementById("ticketType").value);
+
+        const total = passengers * price;
+
+        const ticketNumber =
+            "TKT-" + Math.floor(Math.random() * 1000000);
+
+        const result =
+            document.getElementById("result");
+
+        result.style.display = "block";
+
+        result.innerHTML = `
+            <h3>✅ Booking Confirmed</h3>
+            <br>
+
+            <p class="ticket-number">
+                Ticket: ${ticketNumber}
+            </p>
+
+            <p><strong>Passenger:</strong> ${name}</p>
+            <p><strong>Route:</strong> ${from} → ${to}</p>
+            <p><strong>Date:</strong> ${date}</p>
+            <p><strong>Passengers:</strong> ${passengers}</p>
+            <p><strong>Total Fare:</strong> ₹${total}</p>
+        `;
+
+    });
+
+</script>
+
+</body>
+</html>
