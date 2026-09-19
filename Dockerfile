@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM nginx
 MAINTAINER sohail
 LABEL This is ci cd 
 EXPOSE 80
